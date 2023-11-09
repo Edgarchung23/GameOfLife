@@ -1,8 +1,8 @@
-const unitLength = 20;
+const unitLength = 10;
 const boxColor = 150;
 const strokeColor = 200;
 let columns; /* To be determined by window width */
-let rows; /* To be determined by window height */
+// let rows; /* To be determined by window height */
 let currentBoard;
 let nextBoard;
 let colorPicker;
@@ -10,22 +10,42 @@ let slider;
 // <--------Setup-------->
 
 function setup() {
-  frameRate(); //change Speed
-  colorPicker = createColorPicker("#ed225d");
-  colorPicker.position(500, height + 560);
-  slider = createSlider(1, 20, 50);
-  slider.position(700, 662);
+  let cellPicker = createDiv("Cell Color"); //cell color
+  colorPicker = createColorPicker("#19568c");
+  cellPicker.parent("controlBar");
+  colorPicker.parent("controlBar");
+  colorPicker.style("width", "110px");
+  colorPicker.style("height", "25px");
 
+  let boxBgPicker = createDiv("BackGround Color"); //background Color
+  colorPickerBoxBg = createColorPicker("#fbfcfd");
+  boxBgPicker.parent("controlBar");
+  colorPickerBoxBg.parent("controlBar");
+
+  let strokePicker = createDiv("Stroke Color");
+  colorPickerStroke = createColorPicker("#4a7ca8");
+  strokePicker.parent("controlBar");
+  colorPickerStroke.parent("controlBar");
+
+  let DraggedPicker = createDiv("Dragged Color");
+  ColorPickerDragged = createColorPicker("#ffd966");
+  DraggedPicker.parent("controlBar");
+  ColorPickerDragged.parent("controlBar");
+
+  let sliderControl = createDiv("Speed Control");
+  slider = createSlider(1, 50, 100);
+  sliderControl.parent("controlBar");
+  slider.parent("controlBar");
   // <-------------------->
   /* Set the canvas to be under the element #canvas*/
-  const canvas = createCanvas(windowWidth, windowHeight - 100);
+  const canvas = createCanvas(1000, 800 - 100);
   canvas.parent(document.querySelector("#canvas"));
 
   /*Calculate the number of columns and rows */
   columns = floor(width / unitLength);
   rows = floor(height / unitLength);
 
-  /*Making both currentBoard and nextBoard 2-dimensional matrix that has (columns * rows) boxes. */
+  /*Making both currentBoard and nextBoard 2-dimensional matrix that has (colux4mns * rows) boxes. */
   currentBoard = [];
   nextBoard = [];
   for (let i = 0; i < columns; i++) {
@@ -50,17 +70,18 @@ function init() {
 function draw() {
   let val = slider.value(); //speed slider
   frameRate(val);
-  generate();
+
   // <----------------------->
+  generate();
   for (let i = 0; i < columns; i++) {
     for (let j = 0; j < rows; j++) {
       if (currentBoard[i][j] == 1) {
-        fill(200); // change cell color
+        fill(colorPicker.color()); // change cell color
       } else {
-        fill(300); //change the box background
+        fill(colorPickerBoxBg.color()); //change the box background
       }
-      stroke(230); //change the stroke color;
-      rect(i * unitLength, j * unitLength, unitLength, unitLength);
+      stroke(colorPickerStroke.color()); //change the stroke color;
+      rect(i * unitLength, j * unitLength, unitLength);
     }
   }
 }
@@ -113,23 +134,19 @@ function mouseDragged() {
   const x = Math.floor(mouseX / unitLength);
   const y = Math.floor(mouseY / unitLength);
   currentBoard[x][y] = 1;
-  fill(boxColor);
-  stroke(strokeColor);
-  rect(x * unitLength, y * unitLength, unitLength, unitLength);
+  fill(ColorPickerDragged.color());
+  stroke(0, 0, 0);
+  rect(x * unitLength, y * unitLength, unitLength);
 }
 
 // <--------Mouse Pressed------->
 function mousePressed() {
   noLoop();
   mouseDragged();
+  fill(colorPickerBoxBg.color());
+  // print(grid.cells);
 }
 
 // <--------Mouse Released------->
-function mouseReleased() {
-  loop();
-}
-
-// <--------Rest Game------->
-const resetBtn = document.querySelector(".reset-button");
-resetBtn.addEventListener("click", reset);
-// <---------------->
+function mouseReleased() {}
+//<--------------------->
