@@ -143,10 +143,10 @@ function mouseDragged() {
 function mousePressed() {
   noLoop();
   mouseDragged();
-  fill(colorPickerBoxBg.color());
-  // print(grid.cells);
 }
 
 // <--------Mouse Released------->
-function mouseReleased() {}
+function mouseReleased() {
+  loop();
+}
 //<--------------------->
