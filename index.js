@@ -19,12 +19,12 @@ function setup() {
   colorPicker.style("height", "25px");
 
   let boxBgPicker = createDiv("BackGround Color"); //background Color
-  colorPickerBoxBg = createColorPicker("#fbfcfd");
+  colorPickerBoxBg = createColorPicker("100");
   boxBgPicker.parent("controlBar");
   colorPickerBoxBg.parent("controlBar");
 
   let strokePicker = createDiv("Stroke Color");
-  colorPickerStroke = createColorPicker("255");
+  colorPickerStroke = createColorPicker("#ebf4fd");
   strokePicker.parent("controlBar");
   colorPickerStroke.parent("controlBar");
 
@@ -55,7 +55,7 @@ function setup() {
     nextBoard[i] = [];
   }
   // Now both currentBoard and nextBoard are array of array of undefined values.
-  init(); // Set the initial values of the currentBoard and nextBoard
+  initClear(); // Set the initial values of the currentBoard and nextBoard
 }
 
 // <--------Init-------->
@@ -67,7 +67,7 @@ function init() {
     }
   }
 }
-function initReset() {
+function initClear() {
   for (let i = 0; i < columns; i++) {
     for (let j = 0; j < rows; j++) {
       currentBoard[i][j] = 0;
@@ -86,7 +86,7 @@ function draw() {
     for (let j = 0; j < rows; j++) {
       if (currentBoard[i][j] == 1) {
         if (nextBoard[i][j] == 1) {
-          fill(colorPicker.color()); //  // 之前都係1change cell color
+          fill(colorPicker.color("")); //  // 之前都係1change cell color
         } else {
           fill(colorPickerDragged.color()); // 依家係1 change cell color
         }
@@ -106,8 +106,8 @@ function generate() {
     for (let y = 0; y < rows; y++) {
       // Count all living members in the Moore neighborhood(8 boxes surrounding)
       let neighbors = 0;
-      for (let i of [0, 0, -1]) {
-        for (let j of [-1, 0, 0]) {
+      for (let i of [-1, 0, 1]) {
+        for (let j of [-1, 0, 1]) {
           if (i == 0 && j == 0) {
             // the cell itself is not its own neighbor
             continue;
@@ -118,13 +118,13 @@ function generate() {
         }
       }
       // Rules of Life
-      if (currentBoard[x][y] == 1 && neighbors < 1) {
+      if (currentBoard[x][y] == 1 && neighbors < 2) {
         // Die of Loneliness
         nextBoard[x][y] = 0;
       } else if (currentBoard[x][y] == 1 && neighbors > 3) {
         // Die of Overpopulation
         nextBoard[x][y] = 0;
-      } else if (currentBoard[x][y] == 0 && neighbors == 1) {
+      } else if (currentBoard[x][y] == 0 && neighbors == 3) {
         // New life due to Reproduction
         nextBoard[x][y] = 1;
       } else {
@@ -147,32 +147,39 @@ function mouseDragged() {
   const x = Math.floor(mouseX / unitLength);
   const y = Math.floor(mouseY / unitLength);
   currentBoard[x][y] = 1;
-  fill();
-  stroke(0, 0, 0);
+  fill("#000000");
+  stroke("#000000");
   rect(x * unitLength, y * unitLength, unitLength);
+  noLoop();
 }
 
 // <--------Mouse Pressed------->
 function mousePressed() {
-  // noLoop();
   mouseDragged();
 }
 
 // <--------Mouse Released------->
 function mouseReleased() {
-  // loop();
+  // noLoop();
 }
+//<----------Start--------->
+document.querySelector(".start").addEventListener("click", function () {
+  loop();
+});
 //<-----------Stop---------->
 document.querySelector(".stop").addEventListener("click", function () {
   noLoop();
 });
-//<----------Reset--------->
+
+//<----------Clear--------->
 document.querySelector(".clear").addEventListener("click", function () {
-  initReset();
+  initClear();
+  loop();
 });
 
-//<----------Start--------->
-document.querySelector(".start").addEventListener("click", function () {
-  console.log("175");
+// <---------Randonm---------->
+document.querySelector(".random").addEventListener("click", function () {
   loop();
+  init();
+  noLoop();
 });
