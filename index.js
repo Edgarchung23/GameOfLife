@@ -1,12 +1,13 @@
 const unitLength = 10;
-const boxColor = 150;
-const strokeColor = 200;
+const boxColor = 0;
+const strokeColor = 0;
 let columns; /* To be determined by window width */
 // let rows; /* To be determined by window height */
 let currentBoard;
 let nextBoard;
 let colorPicker;
 let slider;
+let flag = false;
 // <--------Setup-------->
 
 function setup() {
@@ -23,19 +24,20 @@ function setup() {
   colorPickerBoxBg.parent("controlBar");
 
   let strokePicker = createDiv("Stroke Color");
-  colorPickerStroke = createColorPicker("#4a7ca8");
+  colorPickerStroke = createColorPicker("255");
   strokePicker.parent("controlBar");
   colorPickerStroke.parent("controlBar");
 
   let DraggedPicker = createDiv("Dragged Color");
-  ColorPickerDragged = createColorPicker("#ffd966");
+  colorPickerDragged = createColorPicker("#ffd966");
   DraggedPicker.parent("controlBar");
-  ColorPickerDragged.parent("controlBar");
+  colorPickerDragged.parent("controlBar");
 
   let sliderControl = createDiv("Speed Control");
-  slider = createSlider(1, 50, 100);
+  slider = createSlider(1, 200, 20);
   sliderControl.parent("controlBar");
   slider.parent("controlBar");
+  sliderSpan = createSpan;
   // <-------------------->
   /* Set the canvas to be under the element #canvas*/
   const canvas = createCanvas(1000, 800 - 100);
@@ -45,7 +47,7 @@ function setup() {
   columns = floor(width / unitLength);
   rows = floor(height / unitLength);
 
-  /*Making both currentBoard and nextBoard 2-dimensional matrix that has (colux4mns * rows) boxes. */
+  /*Making both currentBoard and nextBoard 2-dimensional matrix that has (columns * rows) boxes. */
   currentBoard = [];
   nextBoard = [];
   for (let i = 0; i < columns; i++) {
@@ -65,18 +67,29 @@ function init() {
     }
   }
 }
+function initReset() {
+  for (let i = 0; i < columns; i++) {
+    for (let j = 0; j < rows; j++) {
+      currentBoard[i][j] = 0;
+      nextBoard[i][j] = 0;
+    }
+  }
+}
 
 // <--------Draw-------->
 function draw() {
   let val = slider.value(); //speed slider
   frameRate(val);
-
   // <----------------------->
   generate();
   for (let i = 0; i < columns; i++) {
     for (let j = 0; j < rows; j++) {
       if (currentBoard[i][j] == 1) {
-        fill(colorPicker.color()); // change cell color
+        if (nextBoard[i][j] == 1) {
+          fill(colorPicker.color()); //  // 之前都係1change cell color
+        } else {
+          fill(colorPickerDragged.color()); // 依家係1 change cell color
+        }
       } else {
         fill(colorPickerBoxBg.color()); //change the box background
       }
@@ -93,8 +106,8 @@ function generate() {
     for (let y = 0; y < rows; y++) {
       // Count all living members in the Moore neighborhood(8 boxes surrounding)
       let neighbors = 0;
-      for (let i of [-1, 0, 1]) {
-        for (let j of [-1, 0, 1]) {
+      for (let i of [0, 0, -1]) {
+        for (let j of [-1, 0, 0]) {
           if (i == 0 && j == 0) {
             // the cell itself is not its own neighbor
             continue;
@@ -105,13 +118,13 @@ function generate() {
         }
       }
       // Rules of Life
-      if (currentBoard[x][y] == 1 && neighbors < 2) {
+      if (currentBoard[x][y] == 1 && neighbors < 1) {
         // Die of Loneliness
         nextBoard[x][y] = 0;
       } else if (currentBoard[x][y] == 1 && neighbors > 3) {
         // Die of Overpopulation
         nextBoard[x][y] = 0;
-      } else if (currentBoard[x][y] == 0 && neighbors == 3) {
+      } else if (currentBoard[x][y] == 0 && neighbors == 1) {
         // New life due to Reproduction
         nextBoard[x][y] = 1;
       } else {
@@ -134,19 +147,32 @@ function mouseDragged() {
   const x = Math.floor(mouseX / unitLength);
   const y = Math.floor(mouseY / unitLength);
   currentBoard[x][y] = 1;
-  fill(ColorPickerDragged.color());
+  fill();
   stroke(0, 0, 0);
   rect(x * unitLength, y * unitLength, unitLength);
 }
 
 // <--------Mouse Pressed------->
 function mousePressed() {
-  noLoop();
+  // noLoop();
   mouseDragged();
 }
 
 // <--------Mouse Released------->
 function mouseReleased() {
-  loop();
+  // loop();
 }
-//<--------------------->
+//<-----------Stop---------->
+document.querySelector(".stop").addEventListener("click", function () {
+  noLoop();
+});
+//<----------Reset--------->
+document.querySelector(".clear").addEventListener("click", function () {
+  initReset();
+});
+
+//<----------Start--------->
+document.querySelector(".start").addEventListener("click", function () {
+  console.log("175");
+  loop();
+});
