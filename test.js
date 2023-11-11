@@ -1,5 +1,15 @@
-[-1, 0, 1][(0, 0, 1)], // bird
-  [1, 0, -1][(0, -1, 0)]; // down bird
+let arr = [1, 2, 3, 4, 5];
+let flag = false;
 
-src =
-  "https://game-of-life.chuniversiteit.nl/game.html?rows=5&cols=15&seed=[[0,1,1,0,0,0,0,0,0,0,0,1,1,1,0],[0,1,1,0,0,0,0,0,0,0,1,0,1,0,1],[0,0,0,0,0,0,0,0,0,0,1,0,1,0,1],[0,1,1,0,0,0,0,0,0,0,1,0,1,0,1],[0,1,1,0,0,0,0,0,0,0,0,1,1,1,0]]";
+for (let elem of arr) {
+  if (elem == 3) {
+    flag = true;
+    break;
+  }
+}
+
+if (flag === true) {
+  console.log("+++");
+} else {
+  console.log("---");
+}

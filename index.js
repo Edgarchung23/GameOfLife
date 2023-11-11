@@ -5,11 +5,12 @@ let columns; /* To be determined by window width */
 // let rows; /* To be determined by window height */
 let currentBoard;
 let nextBoard;
-let colorPicker;
+// let colorPicker;
 let slider;
 let flag = false;
-// <--------Setup-------->
+let ele;
 
+// <--------Setup-------->
 function setup() {
   let cellPicker = createDiv("Cell Color"); //cell color
   colorPicker = createColorPicker("#19568c");
@@ -35,12 +36,15 @@ function setup() {
 
   let sliderControl = createDiv("Speed Control");
   slider = createSlider(1, 200, 20);
-  sliderControl.parent("controlBar");
-  slider.parent("controlBar");
+  sliderControl.parent("secondControlBar");
+  slider.parent("secondControlBar");
   sliderSpan = createSpan;
+
   // <-------------------->
   /* Set the canvas to be under the element #canvas*/
-  const canvas = createCanvas(1000, 800 - 100);
+  createCanvas(windowWidth, windowHeight);
+  // const canvas = createCanvas(windowWidth, windowHeight - 100);
+  const canvas = createCanvas(800, 500 - 100);
   canvas.parent(document.querySelector("#canvas"));
 
   /*Calculate the number of columns and rows */
@@ -54,10 +58,9 @@ function setup() {
     currentBoard[i] = [];
     nextBoard[i] = [];
   }
-  // Now both currentBoard and nextBoard are array of array of undefined values.
+
   initClear(); // Set the initial values of the currentBoard and nextBoard
 }
-
 // <--------Init-------->
 function init() {
   for (let i = 0; i < columns; i++) {
@@ -77,6 +80,7 @@ function initClear() {
 }
 
 // <--------Draw-------->
+
 function draw() {
   let val = slider.value(); //speed slider
   frameRate(val);
@@ -86,7 +90,7 @@ function draw() {
     for (let j = 0; j < rows; j++) {
       if (currentBoard[i][j] == 1) {
         if (nextBoard[i][j] == 1) {
-          fill(colorPicker.color("")); //  // 之前都係1change cell color
+          fill(colorPicker.color()); //  // 之前都係1change cell color
         } else {
           fill(colorPickerDragged.color()); // 依家係1 change cell color
         }
@@ -94,7 +98,11 @@ function draw() {
         fill(colorPickerBoxBg.color()); //change the box background
       }
       stroke(colorPickerStroke.color()); //change the stroke color;
-      rect(i * unitLength, j * unitLength, unitLength);
+      circle(
+        i * unitLength + unitLength / 2,
+        j * unitLength + unitLength / 2,
+        unitLength
+      );
     }
   }
 }
@@ -147,14 +155,22 @@ function mouseDragged() {
   const x = Math.floor(mouseX / unitLength);
   const y = Math.floor(mouseY / unitLength);
   currentBoard[x][y] = 1;
+
   fill("#000000");
   stroke("#000000");
-  rect(x * unitLength, y * unitLength, unitLength);
+  circle(
+    //change square to circle
+    x * unitLength + unitLength / 2,
+    y * unitLength + unitLength / 2,
+    unitLength
+  );
+
   noLoop();
 }
 
 // <--------Mouse Pressed------->
 function mousePressed() {
+  // noLoop();
   mouseDragged();
 }
 
@@ -165,21 +181,39 @@ function mouseReleased() {
 //<----------Start--------->
 document.querySelector(".start").addEventListener("click", function () {
   loop();
+  flag = true;
 });
 //<-----------Stop---------->
 document.querySelector(".stop").addEventListener("click", function () {
   noLoop();
+  flag = false;
 });
-
-//<----------Clear--------->
+//<----------Clear---------->
 document.querySelector(".clear").addEventListener("click", function () {
   initClear();
   loop();
 });
 
-// <---------Randonm---------->
+//<---------Random--------->
 document.querySelector(".random").addEventListener("click", function () {
-  loop();
-  init();
   noLoop();
+  init();
+  loop();
+});
+//<---------LoopAgain--------->
+function LoopAgain() {
+  loop();
+}
+
+//-------------------------------
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+document.querySelector(".mp3").addEventListener("click", function () {
+  const selectElement = document.querySelector(".mp3");
+  const result = document.querySelector(".result");
+  ele = createAudio("mp3/Sonic The Hedgehog OST - Green Hill Zone.mp3");
+  ele.autoplay(true);
+  ele.volume(0.3);
 });
