@@ -1,5 +1,6 @@
 body {
-  height: 1425px;
+  height: 1260px;
+  width: auto;
   display: flex;
   justify-content: center;
   margin-top: 20px;
@@ -15,14 +16,11 @@ body {
     rgba(255, 255, 255, 1) 100%
   );
 }
+
 #title {
   font-size: 100px;
   font-family: serif;
   margin-bottom: 20px;
-  text-shadow: 5.5px -5.5px, 2px 1px 1px rgba(119, 223, 255, 0.686);
-  color: transparent;
-  -webkit-text-stroke-width: 6px;
-  -webkit-text-stroke-color: #000;
 }
 #canvas {
   display: flex;

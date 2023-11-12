@@ -57,7 +57,6 @@ function setup() {
     currentBoard[i] = [];
     nextBoard[i] = [];
   }
-
   initClear(); // Set the initial values of the currentBoard and nextBoard
 }
 
@@ -68,10 +67,11 @@ const selectElement = document
   .addEventListener("change", (e) => {
     cp = e.target.value;
   });
+
 // document.addEventListener("DOMContentLoaded", () => {
 //   const cellDead = document.querySelector("#changeNeighbor");
-//   cellDead.addEventListener("change", (e) => {
-//     cp1 = e.target.value;
+//   cellDead.addEventListener("change", (event) => {
+//     cp1 = event.target.value;
 //   });
 // });
 
@@ -80,6 +80,7 @@ function init() {
   for (let i = 0; i < columns; i++) {
     for (let j = 0; j < rows; j++) {
       currentBoard[i][j] = random() > 0.8 ? 1 : 0;
+
       nextBoard[i][j] = 0;
     }
   }
@@ -104,6 +105,7 @@ function draw() {
   for (let i = 0; i < columns; i++) {
     for (let j = 0; j < rows; j++) {
       if (currentBoard[i][j] == 1) {
+        // lifeCount = lifeCount + 1;
         if (nextBoard[i][j] == 1) {
           fill(colorPicker.color()); //  // 之前都係1change cell color
         } else {
@@ -118,6 +120,7 @@ function draw() {
         j * unitLength + unitLength / 2,
         unitLength
       );
+      // document.querySelector("#life-Count").innerHTML = lifeCount;
     }
   }
 }
@@ -213,7 +216,9 @@ document.querySelector(".Refresh").addEventListener("click", function () {
 });
 //<------------Audio---------->
 document.querySelector(".mp3").addEventListener("click", function () {
-  ele = createAudio("mp3/Sonic The Hedgehog OST - Green Hill Zone.mp3");
+  ele = createAudio(
+    "mp3/Rick Astley - Never Gonna Give You Up (Official Music Video).mp3"
+  );
   ele.autoplay(true);
   ele.volume(0.3);
 }); //audio
