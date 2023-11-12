@@ -8,7 +8,8 @@ let nextBoard;
 // let colorPicker;
 let slider;
 let flag = false;
-let ele;
+let cp1 = 3;
+let cp = 2;
 
 // <--------Setup-------->
 function setup() {
@@ -21,11 +22,12 @@ function setup() {
 
   let boxBgPicker = createDiv("BackGround Color"); //background Color
   colorPickerBoxBg = createColorPicker("100");
+
   boxBgPicker.parent("controlBar");
   colorPickerBoxBg.parent("controlBar");
 
   let strokePicker = createDiv("Stroke Color");
-  colorPickerStroke = createColorPicker("#ebf4fd");
+  colorPickerStroke = createColorPicker("#e3e3e3");
   strokePicker.parent("controlBar");
   colorPickerStroke.parent("controlBar");
 
@@ -35,22 +37,19 @@ function setup() {
   colorPickerDragged.parent("controlBar");
 
   let sliderControl = createDiv("Speed Control");
-  slider = createSlider(1, 200, 20);
+  slider = createSlider(1, 50, 10);
   sliderControl.parent("secondControlBar");
   slider.parent("secondControlBar");
-  sliderSpan = createSpan;
+  sliderControl.style("margin-top: 6px;");
 
   // <-------------------->
   /* Set the canvas to be under the element #canvas*/
-  createCanvas(windowWidth, windowHeight);
-  // const canvas = createCanvas(windowWidth, windowHeight - 100);
-  const canvas = createCanvas(800, 500 - 100);
-  canvas.parent(document.querySelector("#canvas"));
-
+  // const canvas = createCanvas(windowWidth, windowHeight);
+  const canvas = createCanvas(900, 1000 - 200);
+  canvas.parent("#canvas");
   /*Calculate the number of columns and rows */
   columns = floor(width / unitLength);
   rows = floor(height / unitLength);
-
   /*Making both currentBoard and nextBoard 2-dimensional matrix that has (columns * rows) boxes. */
   currentBoard = [];
   nextBoard = [];
@@ -61,6 +60,21 @@ function setup() {
 
   initClear(); // Set the initial values of the currentBoard and nextBoard
 }
+
+//<---------Rules---------->
+
+const selectElement = document
+  .querySelector("#cp")
+  .addEventListener("change", (e) => {
+    cp = e.target.value;
+  });
+// document.addEventListener("DOMContentLoaded", () => {
+//   const cellDead = document.querySelector("#changeNeighbor");
+//   cellDead.addEventListener("change", (e) => {
+//     cp1 = e.target.value;
+//   });
+// });
+
 // <--------Init-------->
 function init() {
   for (let i = 0; i < columns; i++) {
@@ -77,6 +91,7 @@ function initClear() {
       nextBoard[i][j] = 0;
     }
   }
+  noLoop();
 }
 
 // <--------Draw-------->
@@ -126,10 +141,10 @@ function generate() {
         }
       }
       // Rules of Life
-      if (currentBoard[x][y] == 1 && neighbors < 2) {
+      if (currentBoard[x][y] == 1 && neighbors < cp) {
         // Die of Loneliness
         nextBoard[x][y] = 0;
-      } else if (currentBoard[x][y] == 1 && neighbors > 3) {
+      } else if (currentBoard[x][y] == 1 && neighbors > cp1) {
         // Die of Overpopulation
         nextBoard[x][y] = 0;
       } else if (currentBoard[x][y] == 0 && neighbors == 3) {
@@ -140,6 +155,7 @@ function generate() {
         nextBoard[x][y] = currentBoard[x][y];
       }
     }
+    continue;
   } // Swap the nextBoard to be the current Board
   [currentBoard, nextBoard] = [nextBoard, currentBoard];
 }
@@ -155,25 +171,19 @@ function mouseDragged() {
   const x = Math.floor(mouseX / unitLength);
   const y = Math.floor(mouseY / unitLength);
   currentBoard[x][y] = 1;
-
   fill("#000000");
-  stroke("#000000");
+  stroke("255");
   circle(
     //change square to circle
     x * unitLength + unitLength / 2,
     y * unitLength + unitLength / 2,
     unitLength
   );
-
-  noLoop();
 }
-
 // <--------Mouse Pressed------->
 function mousePressed() {
-  // noLoop();
-  mouseDragged();
+  // mouseDragged();
 }
-
 // <--------Mouse Released------->
 function mouseReleased() {
   // noLoop();
@@ -181,12 +191,10 @@ function mouseReleased() {
 //<----------Start--------->
 document.querySelector(".start").addEventListener("click", function () {
   loop();
-  flag = true;
 });
 //<-----------Stop---------->
 document.querySelector(".stop").addEventListener("click", function () {
   noLoop();
-  flag = false;
 });
 //<----------Clear---------->
 document.querySelector(".clear").addEventListener("click", function () {
@@ -194,26 +202,19 @@ document.querySelector(".clear").addEventListener("click", function () {
   loop();
 });
 
-//<---------Random--------->
+//<---------Create--------->
 document.querySelector(".random").addEventListener("click", function () {
-  noLoop();
   init();
   loop();
 });
-//<---------LoopAgain--------->
-function LoopAgain() {
-  loop();
-}
-
-//-------------------------------
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
-
+//<---------Refresh---------->`
+document.querySelector(".Refresh").addEventListener("click", function () {
+  location.reload();
+});
+//<------------Audio---------->
 document.querySelector(".mp3").addEventListener("click", function () {
-  const selectElement = document.querySelector(".mp3");
-  const result = document.querySelector(".result");
   ele = createAudio("mp3/Sonic The Hedgehog OST - Green Hill Zone.mp3");
   ele.autoplay(true);
   ele.volume(0.3);
-});
+}); //audio
+//<----------------------------->

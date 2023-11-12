@@ -1,0 +1,104 @@
+body {
+  height: 1425px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  font-weight: bold;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 217, 102, 1) 0%,
+    rgba(163, 183, 201, 0.6153054971988796) 4%,
+    rgba(185, 203, 218, 0.455641631652661) 37%,
+    rgba(209, 223, 235, 1) 67%,
+    rgba(232, 240, 246, 1) 89%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+#title {
+  font-size: 100px;
+  font-family: serif;
+  margin-bottom: 20px;
+  text-shadow: 5.5px -5.5px, 2px 1px 1px rgba(119, 223, 255, 0.686);
+  color: transparent;
+  -webkit-text-stroke-width: 6px;
+  -webkit-text-stroke-color: #000;
+}
+#canvas {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+/* Menubar */
+.menuBar {
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+}
+
+.menuBar2 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Button */
+.submit {
+  height: 30px;
+  width: 200px;
+  background: rgb(255, 255, 255);
+  border: solid 1px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.submit2 {
+  width: 200px;
+  height: auto;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+/* Button */
+
+/* Speed Button */
+input[type="range"] {
+  width: 150px;
+}
+/* Color Picker Button */
+input[type="color"] {
+  width: 110px;
+  height: 25px;
+  padding: 3px;
+  border: solid 1px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.secondcontainer {
+  width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+#controlBar {
+  width: 1300px;
+  height: 30px;
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+}
+
+#secondControlBar {
+  display: flex;
+  width: 1180px;
+  justify-content: center;
+}
+#cp {
+  margin-right: 200px;
+}
