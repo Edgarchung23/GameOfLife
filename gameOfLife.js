@@ -45,7 +45,7 @@ function setup() {
   // <-------------------->
   /* Set the canvas to be under the element #canvas*/
   // const canvas = createCanvas(windowWidth, windowHeight);
-  const canvas = createCanvas(1200, 740 - 200);
+  const canvas = createCanvas(1100, 730 - 200);
   canvas.parent("#canvas");
   /*Calculate the number of columns and rows */
   columns = floor(width / unitLength);
