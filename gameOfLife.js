@@ -8,8 +8,8 @@ let nextBoard;
 // let colorPicker;
 let slider;
 let flag = false;
-let cp1 = 3;
-let cp = 2;
+let doL = 2;
+let doO = 3;
 
 // <--------Setup-------->
 function setup() {
@@ -32,7 +32,7 @@ function setup() {
   colorPickerStroke.parent("controlBar");
 
   let DraggedPicker = createDiv("Dragged Color");
-  colorPickerDragged = createColorPicker("#ffd966");
+  colorPickerDragged = createColorPicker("#000000");
   DraggedPicker.parent("controlBar");
   colorPickerDragged.parent("controlBar");
 
@@ -45,7 +45,7 @@ function setup() {
   // <-------------------->
   /* Set the canvas to be under the element #canvas*/
   // const canvas = createCanvas(windowWidth, windowHeight);
-  const canvas = createCanvas(1100, 730 - 200);
+  const canvas = createCanvas(1000, 800 - 200);
   canvas.parent("#canvas");
   /*Calculate the number of columns and rows */
   columns = floor(width / unitLength);
@@ -63,17 +63,15 @@ function setup() {
 //<---------Rules---------->
 
 const selectElement = document
-  .querySelector("#cp")
+  .querySelector("#changeLoneliness")
   .addEventListener("change", (e) => {
-    cp = e.target.value;
+    doL = e.target.value;
   });
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   const cellDead = document.querySelector("#changeNeighbor");
-//   cellDead.addEventListener("change", (event) => {
-//     cp1 = event.target.value;
-//   });
-// });
+const cellDead = document.querySelector("#changeOverpopulation");
+cellDead.addEventListener("change", (event) => {
+  doO = event.target.value;
+});
 
 // <--------Init-------->
 function init() {
@@ -109,7 +107,7 @@ function draw() {
         if (nextBoard[i][j] == 1) {
           fill(colorPicker.color()); //  // 之前都係1change cell color
         } else {
-          fill(colorPickerDragged.color()); // 依家係1 change cell color
+          fill("#ffd966"); // 依家係1 change cell color
         }
       } else {
         fill(colorPickerBoxBg.color()); //change the box background
@@ -144,10 +142,10 @@ function generate() {
         }
       }
       // Rules of Life
-      if (currentBoard[x][y] == 1 && neighbors < cp) {
+      if (currentBoard[x][y] == 1 && neighbors < doL) {
         // Die of Loneliness
         nextBoard[x][y] = 0;
-      } else if (currentBoard[x][y] == 1 && neighbors > cp1) {
+      } else if (currentBoard[x][y] == 1 && neighbors > doO) {
         // Die of Overpopulation
         nextBoard[x][y] = 0;
       } else if (currentBoard[x][y] == 0 && neighbors == 3) {
@@ -174,8 +172,8 @@ function mouseDragged() {
   const x = Math.floor(mouseX / unitLength);
   const y = Math.floor(mouseY / unitLength);
   currentBoard[x][y] = 1;
-  fill("#000000");
-  stroke("255");
+  fill(colorPickerDragged.color());
+  stroke(colorPickerDragged.color());
   circle(
     //change square to circle
     x * unitLength + unitLength / 2,
@@ -223,3 +221,8 @@ document.querySelector(".mp3").addEventListener("click", function () {
   ele.volume(0.3);
 }); //audio
 //<----------------------------->
+
+// window.addEventListener("resize", (e) => {
+//   console.log("resized: ", window.innerWidth, " x ", window.innerHeight);
+//   init();
+// });

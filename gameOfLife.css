@@ -1,36 +1,31 @@
 body {
   height: 1150px;
-  width: auto;
   display: flex;
   justify-content: center;
   margin-top: 20px;
   flex-wrap: wrap;
   font-weight: bold;
-  background-image: url("/wepik-export-20231112170028Sheu.jpeg");
-  background-size: 102% 130%;
+  background-image: url("/img/wepik-export-20231112170028Sheu.jpeg");
+  background-size: 102% 150%;
   background-position-y: -100px;
 }
 
-/* .sbody {
+.sbody {
   margin-top: -25px;
-} */
+}
 #title {
   font-size: 60px;
   color: black;
   font-family: serif;
-  margin-bottom: 15px;
+  margin-bottom: 90px;
 }
-#canvas {
-  display: flex;
-  justify-content: center;
-  margin: 15px;
-}
+
 /* Menubar */
 .menuBar {
   display: flex;
   justify-content: center;
-
   align-items: center;
+  margin-top: 30px;
 }
 
 .menuBar2 {
@@ -94,7 +89,22 @@ input[type="color"] {
   display: flex;
   width: 1180px;
   justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 #cp {
   margin-right: 200px;
 }
+
+#canvas {
+  display: flex;
+  justify-content: center;
+  /* margin: 15px; */
+}
+/* 
+@media screen and (max-width: 430px) {
+  .sbody .menuBar {
+    display: flex;
+    flex-direction: column;
+  }
+} */
