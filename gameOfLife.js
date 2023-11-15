@@ -10,9 +10,72 @@ let slider;
 let flag = false;
 let doL = 2;
 let doO = 3;
+const patternA = `........................O...........
+......................O.O...........
+............OO......OO............OO
+...........O...O....OO............OO
+OO........O.....O...OO..............
+OO........O...O.OO....O.O...........
+..........O.....O.......O...........
+...........O...O....................
+............OO......................`;
 
+// window.addEventListener("resize", (e) => {
+//   const middleContainer = document.querySelector("middle-container");
+//   middleContainer.innerHTML = "";
+
+//   const feetContainerChildren = document.querySelectorAll(".feet-container > div");
+
+//   feetContainerChildren.forEach(child) => {
+//     child.innerHTML = "";
+//   }
+// });
+
+// const canvas = document.createElement("div");
+// canvas.setAttribute("id", "canvas");
+// middleContainer.appendChild(canvas);\
+
+// setup();
+// updateUI();
+
+// document.querySelector(".change-mode-btn").addEventListener('click', (e) => {
+//   document.querySelector("body").classList.toggle("body-dark");
+//   document.querySelector(".bottom-container").classList.toggle("bottom-dark");
+//   toggle("bottom-dark")
+//   bgColor = 10;
+//   updateUI();
+
+// })
+
+// document.querySelector(".pattern-a-btn").addEventListener("click", (e) => {
+//   init();
+//   for (let i = 0; i < patternA.length; i++) {
+//     for (let j = 0; j < patternA[i].length; j++ ){
+//       currentBoard[i][j] = patternA[j][i];
+//     }
+//   }
+
+//   updateUI();
+// })
 // <--------Setup-------->
 function setup() {
+  // <-------------------->
+  /* Set the canvas to be under the element #canvas*/
+  // const canvas = createCanvas(windowWidth, windowHeight);
+  const canvas = createCanvas(1000, 800 - 200);
+  canvas.parent("#canvas");
+  /*Calculate the number of columns and rows */
+  columns = floor(width / unitLength);
+  rows = floor(height / unitLength);
+  /*Making both currentBoard and nextBoard 2-dimensional matrix that has (columns * rows) boxes. */
+  currentBoard = [];
+  nextBoard = [];
+  for (let i = 0; i < columns; i++) {
+    currentBoard[i] = [];
+    nextBoard[i] = [];
+  }
+  initClear(); // Set the initial values of the currentBoard and nextBoard
+
   let cellPicker = createDiv("Cell Color"); //cell color
   colorPicker = createColorPicker("#19568c");
   cellPicker.parent("controlBar");
@@ -41,23 +104,6 @@ function setup() {
   sliderControl.parent("secondControlBar");
   slider.parent("secondControlBar");
   sliderControl.style("margin-top: 6px;");
-
-  // <-------------------->
-  /* Set the canvas to be under the element #canvas*/
-  // const canvas = createCanvas(windowWidth, windowHeight);
-  const canvas = createCanvas(1000, 800 - 200);
-  canvas.parent("#canvas");
-  /*Calculate the number of columns and rows */
-  columns = floor(width / unitLength);
-  rows = floor(height / unitLength);
-  /*Making both currentBoard and nextBoard 2-dimensional matrix that has (columns * rows) boxes. */
-  currentBoard = [];
-  nextBoard = [];
-  for (let i = 0; i < columns; i++) {
-    currentBoard[i] = [];
-    nextBoard[i] = [];
-  }
-  initClear(); // Set the initial values of the currentBoard and nextBoard
 }
 
 //<---------Rules---------->
