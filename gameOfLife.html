@@ -13,51 +13,50 @@
 <body>
 
     <div class="background">
-        <div class="sbody">
-            <div class="secondcontainer">
-                <span id="title">Conway's Game of Life </span>
-                <div id="controlBar"></div>
-                <div id="secondControlBar">
-                    <button class="change-mode-btn , submit">gungun</button>
-                    <select id="changeLoneliness" class="submit">
-                        <option value="2">Rules - Loneliness</option>
-                        <option value="1">1</option>
-                        <option value="2">2(Default)</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                    <select id="changeOverpopulation" class="submit">
-                        <option value="3">Rules - Overpopulation </option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3(Default)</option>
-                        <option value="4">4</option>
-                        <!-- <option value="4">4</option> - -->
-                    </select>
-                </div>
-
+        <div class="secondcontainer">
+            <span id="title">Conway's Game of Life </span>
+            <div id="controlBar"></div>
+            <div id="secondControlBar">
+                <button class="change-mode-btn , submit">gungun</button>
+                <select id="changeLoneliness" class="submit">
+                    <option value="2">Rules - Loneliness</option>
+                    <option value="1">1</option>
+                    <option value="2">2(Default)</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <select id="changeOverpopulation" class="submit">
+                    <option value="3">Rules - Overpopulation </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3(Default)</option>
+                    <option value="4">4</option>
+                    <!-- <option value="4">4</option> - -->
+                </select>
             </div>
 
-            <div id="canvas">
-            </div>
-            <div class="menuBar buttons">
-                <button class="start , submit">Start</button>
-                <button class="stop , submit">Stop</button>
-                <button class="clear , submit">Clear</button>
-                <button class="random , submit">Create</button>
-            </div>
-            <div class="menuBar2">
-                <button class="Refresh , submit , submit2">Refresh Page</button>
-                <button class="mp3 , submit , submit2">Non-Stop Music</button>
-            </div>
         </div>
 
+        <div id="canvas">
+        </div>
+        <div class="menuBar buttons">
+            <button class="start , submit">Start</button>
+            <button class="stop , submit">Stop</button>
+            <button class="clear , submit">Clear</button>
+            <button class="random , submit">Create</button>
+        </div>
+        <div class="menuBar2">
+            <button class="Refresh , submit , submit2">Refresh Page</button>
+            <button class="mp3 , submit , submit2">Non-Stop Music</button>
+        </div>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
-            </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
-        <script src="gameOfLife.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+    <script src="gameOfLife.js"></script>
 </body>
 
 </html>

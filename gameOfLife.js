@@ -20,10 +20,6 @@ OO........O...O.OO....O.O...........
 ...........O...O....................
 ............OO......................`;
 
-// window.addEventListener("resize", (e) => {
-//   const middleContainer = document.querySelector("middle-container");
-//   middleContainer.innerHTML = "";
-
 //   const feetContainerChildren = document.querySelectorAll(".feet-container > div");
 
 //   feetContainerChildren.forEach(child) => {
@@ -60,22 +56,12 @@ OO........O...O.OO....O.O...........
 // <--------Setup-------->
 function setup() {
   // <-------------------->
-  /* Set the canvas to be under the element #canvas*/
-  // const canvas = createCanvas(windowWidth, windowHeight);
-  const canvas = createCanvas(1000, 800 - 200);
-  canvas.parent("#canvas");
-  /*Calculate the number of columns and rows */
-  columns = floor(width / unitLength);
-  rows = floor(height / unitLength);
-  /*Making both currentBoard and nextBoard 2-dimensional matrix that has (columns * rows) boxes. */
-  currentBoard = [];
-  nextBoard = [];
-  for (let i = 0; i < columns; i++) {
-    currentBoard[i] = [];
-    nextBoard[i] = [];
-  }
-  initClear(); // Set the initial values of the currentBoard and nextBoard
 
+  boardInit();
+  controlInit();
+}
+
+function controlInit() {
   let cellPicker = createDiv("Cell Color"); //cell color
   colorPicker = createColorPicker("#19568c");
   cellPicker.parent("controlBar");
@@ -104,6 +90,24 @@ function setup() {
   sliderControl.parent("secondControlBar");
   slider.parent("secondControlBar");
   sliderControl.style("margin-top: 6px;");
+}
+
+function boardInit() {
+  /* Set the canvas to be under the element #canvas*/
+  const canvas = createCanvas(windowWidth - 750, windowHeight - 360);
+  // const canvas = createCanvas(1000, 800 - 200);
+  canvas.parent("#canvas");
+  /*Calculate the number of columns and rows */
+  columns = floor(width / unitLength);
+  rows = floor(height / unitLength);
+  /*Making both currentBoard and nextBoard 2-dimensional matrix that has (columns * rows) boxes. */
+  currentBoard = [];
+  nextBoard = [];
+  for (let i = 0; i < columns; i++) {
+    currentBoard[i] = [];
+    nextBoard[i] = [];
+  }
+  initClear(); // Set the initial values of the currentBoard and nextBoard
 }
 
 //<---------Rules---------->
@@ -164,7 +168,6 @@ function draw() {
         j * unitLength + unitLength / 2,
         unitLength
       );
-      // document.querySelector("#life-Count").innerHTML = lifeCount;
     }
   }
 }
@@ -268,7 +271,7 @@ document.querySelector(".mp3").addEventListener("click", function () {
 }); //audio
 //<----------------------------->
 
-// window.addEventListener("resize", (e) => {
-//   console.log("resized: ", window.innerWidth, " x ", window.innerHeight);
-//   init();
-// });
+function windowResized() {
+  boardInit();
+  draw();
+}
