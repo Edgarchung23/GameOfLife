@@ -1,23 +1,23 @@
 body {
   background-image: url("/img/close-up-hands-holding-blank-board.jpg");
-  background-position-x: -39em;
-  /* background-size: auto; */
-  /* background-position-x: -650px; */
-  background-size: 100%;
-  margin-top: 150px;
+  background-position-x: -470px;
+  background-size: 105%;
+  margin-top: 115px;
   justify-content: center;
-
-  height: 1000px;
+  height: 900px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color: rgb(252 252 252);
 }
 
 .title {
   font-size: 25px;
   /* margin-top: 150px; */
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 }
 
 .firstcontainer {
-  font-size: 25px;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 

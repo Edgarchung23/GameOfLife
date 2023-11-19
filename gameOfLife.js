@@ -5,20 +5,19 @@ let columns; /* To be determined by window width */
 // let rows; /* To be determined by window height */
 let currentBoard;
 let nextBoard;
-// let colorPicker;
 let slider;
 let flag = false;
 let doL = 2;
 let doO = 3;
-const patternA = `........................O...........
-......................O.O...........
-............OO......OO............OO
-...........O...O....OO............OO
-OO........O.....O...OO..............
-OO........O...O.OO....O.O...........
-..........O.....O.......O...........
-...........O...O....................
-............OO......................`;
+// const patternA = `........................O...........
+// ......................O.O...........
+// ............OO......OO............OO
+// ...........O...O....OO............OO
+// OO........O.....O...OO..............
+// OO........O...O.OO....O.O...........
+// ..........O.....O.......O...........
+// ...........O...O....................
+// ............OO......................`;
 
 //   const feetContainerChildren = document.querySelectorAll(".feet-container > div");
 
@@ -53,14 +52,14 @@ OO........O...O.OO....O.O...........
 
 //   updateUI();
 // })
+
 // <--------Setup-------->
 function setup() {
-  // <-------------------->
-
   boardInit();
   controlInit();
 }
 
+// <-------Canvas Draw------->
 function controlInit() {
   let cellPicker = createDiv("Cell Color"); //cell color
   colorPicker = createColorPicker("#19568c");
@@ -93,21 +92,18 @@ function controlInit() {
 }
 
 function boardInit() {
-  /* Set the canvas to be under the element #canvas*/
-  const canvas = createCanvas(windowWidth - 750, windowHeight - 360);
+  const canvas = createCanvas(windowWidth - 750, windowHeight - 400);
   // const canvas = createCanvas(1000, 800 - 200);
   canvas.parent("#canvas");
-  /*Calculate the number of columns and rows */
   columns = floor(width / unitLength);
   rows = floor(height / unitLength);
-  /*Making both currentBoard and nextBoard 2-dimensional matrix that has (columns * rows) boxes. */
   currentBoard = [];
   nextBoard = [];
   for (let i = 0; i < columns; i++) {
     currentBoard[i] = [];
     nextBoard[i] = [];
   }
-  initClear(); // Set the initial values of the currentBoard and nextBoard
+  initClear();
 }
 
 //<---------Rules---------->
@@ -133,6 +129,8 @@ function init() {
     }
   }
 }
+
+// <-------Init Pause----->
 function initClear() {
   for (let i = 0; i < columns; i++) {
     for (let j = 0; j < rows; j++) {
@@ -144,7 +142,6 @@ function initClear() {
 }
 
 // <--------Draw-------->
-
 function draw() {
   let val = slider.value(); //speed slider
   frameRate(val);
@@ -170,6 +167,7 @@ function draw() {
       );
     }
   }
+  loop();
 }
 
 // <--------Generate-------->
@@ -268,9 +266,8 @@ document.querySelector(".mp3").addEventListener("click", function () {
   );
   ele.autoplay(true);
   ele.volume(0.3);
-}); //audio
-//<----------------------------->
-
+});
+//<--------window Resized-------->
 function windowResized() {
   boardInit();
   draw();

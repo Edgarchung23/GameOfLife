@@ -1,12 +1,10 @@
 body {
-
-  /* height: 1150px; */
+  height: 820px;
   display: flex;
   justify-content: center; 
   flex-wrap: wrap;
   font-weight: bold;
-  background-image: url("/img/wepik-export-20231112170028Sheu.jpeg");
-  background-size: 102% 150%;
+  background-image: url("/img/13DA84A6-EAB7-4A0D-8CA2-2B1E23397225_1_201_a.jpeg");
   background-position-y: -100px;
 }
 
@@ -14,7 +12,7 @@ body {
   font-size: 60px;
   color: black;
   font-family: serif;
-  /* margin-bottom: 90px; */
+  margin-bottom:15px;
 }
 
 /* Menubar */
@@ -22,7 +20,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 0px;
 }
 
 .menuBar2 {
@@ -78,7 +76,7 @@ input[type="color"] {
   width: 1300px;
   height: 30px;
   display: flex;
-  margin-top: 30px;
+  margin-top: 25px;
   justify-content: center;
 }
 
@@ -86,8 +84,8 @@ input[type="color"] {
   display: flex;
   width: 1180px;
   justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 #cp {
   margin-right: 200px;
