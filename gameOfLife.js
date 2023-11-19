@@ -124,7 +124,6 @@ function init() {
   for (let i = 0; i < columns; i++) {
     for (let j = 0; j < rows; j++) {
       currentBoard[i][j] = random() > 0.8 ? 1 : 0;
-
       nextBoard[i][j] = 0;
     }
   }
@@ -138,7 +137,6 @@ function initClear() {
       nextBoard[i][j] = 0;
     }
   }
-  noLoop();
 }
 
 // <--------Draw-------->
@@ -167,7 +165,6 @@ function draw() {
       );
     }
   }
-  loop();
 }
 
 // <--------Generate-------->

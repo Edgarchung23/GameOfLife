@@ -1,11 +1,13 @@
 body {
-  height: 820px;
+  height: 1000px;
   display: flex;
   justify-content: center; 
   flex-wrap: wrap;
   font-weight: bold;
   background-image: url("/img/13DA84A6-EAB7-4A0D-8CA2-2B1E23397225_1_201_a.jpeg");
-  background-position-y: -100px;
+  background-position-y: -95px;
+  background-size: 100%;
+  background-position-x: 15px
 }
 
 #title {
@@ -20,7 +22,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 0px;
+  margin-top: 20px;
 }
 
 .menuBar2 {
@@ -76,7 +78,7 @@ input[type="color"] {
   width: 1300px;
   height: 30px;
   display: flex;
-  margin-top: 25px;
+  margin-top: 50px;
   justify-content: center;
 }
 
@@ -85,7 +87,8 @@ input[type="color"] {
   width: 1180px;
   justify-content: center;
   margin-top: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
+
 }
 #cp {
   margin-right: 200px;
